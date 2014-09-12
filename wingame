@@ -1,0 +1,252 @@
+#include <stdio.h>     
+#include <stdlib.h>     
+#include <time.h>
+#include <string.h>
+#include <ctype.h>
+#include <windows.h> 
+
+
+void sorteio();
+void jogar (char frase[]);
+int anima(int aux);
+
+int main ()
+{  
+    fflush(stdin);
+    char conf;
+    MessageBox(NULL, "Deseja sortear uma palavra ?(S/N)","Jogo da forca", MB_OK); 
+    scanf("%c",&conf);
+    while(conf =='s')
+    {
+    sorteio();
+    fflush(stdin);
+    MessageBox(NULL, "Deseja jogar novamente ?(S/N)","Jogo da forca", MB_OK); 
+    scanf("%c",&conf);
+    }
+	
+	system("pause"); 	
+	return 0;
+}
+
+void sorteio()
+{
+    fflush(stdin);
+    int i,j;
+   char palavras [178][38]={"arroz","feijao","maracuja","juventus","internazionale","moscou","nova iorque","rugby","basquete","pilha","coelho","fone","televisao","tela","impressora","celular","chocolate","fluminense","sao paulo",
+	"belo horizonte","vilao","heroi","argentina","camera","latitude","aviao","inglaterra","mercurio","oeste","chicago","natal","persia","grecia","superficial","copa","holanda","atividade","mega","ilha","ultima","parque","guadalupe",
+	"letonia","comida","trono","policia","urna","papa","legislacao","estocolmo","tudo","assunto","controle","jogador","hoje","australia","vexame","teresopolis","amanha","passaro","dificil","acesso","papibaquigrafo","casa","valioso",
+	"simpatia","exercicio","ingleses","organizacao","euforia","pessoa","sabedoria","vontade","california","samba","minerador","apresentacao","constituicao","divisao","minutos","azul","corredor","medico","bermuda","cachorro","imagens",
+	"animal","rato","teclado","volume","editor","executivo","jornalismo","cartao","morto","porto","alegria","producao","importante","equipe","nacionalidade","coracao","japao","carro","musica","perfilado","aplausos","vivo","redencao",
+	"reino","uniao","calopsita","treinador","sistema","nacional","surfe","negocio","destruicao","escola","executado","remedio","tecnico","formacao","esquema","fofa","camiseta","cabeludo","barba","canela","nojento","goleiro","cadeira",
+	"carteira","camisa","saudacao","piano","agapornes","quadro","reflexo","espelho","planta","proximo","rolamento","levantado","abelha","coronel","rispida","rigido","ancestrais","virologia","estupidez","apoio","bola","perigosa","filme",
+	"caveira","lingua","sociedade","letras","gremio","mesa","dedo","mosca","sujeira","piso","dificuldade","recuo","cimento","campo","pizza","invecibilidade","matematica","sociologia","lugar","varal","gravata","progamacao","circulo"};
+    char sorteada[38];
+	
+	srand(time(NULL));
+	i=rand()%178;
+	 for(j=0;j<178;j++)
+	 {
+     	sorteada[j]=palavras[i][j];
+     }
+	MessageBox(NULL, "A Palavra foi Sorteada","Jogo da forca", MB_OK); 
+	jogar (sorteada);
+
+		
+}
+
+void jogar (char frase[])
+{
+ int i, contador, n, nchar, erro1, erro2, erro3, erro4, erro5,certo;
+ char resposta[20], tentativa, confirmar;
+  certo = 0;
+  nchar=0;
+  n = 0;
+  i=0;
+  contador = 0;
+  erro1 = ' ';
+  erro2 = ' ';
+  erro3 = ' ';
+  erro4 = ' ';
+  erro5 = ' ';     
+      MessageBox(NULL, "Iniciar jogo?","Jogo da forca", MB_OK); 
+      fflush(stdin);
+      scanf("%c", &confirmar);
+      switch(confirmar)
+        {
+          case 's':
+          printf("O jogo sera iniciado...\n");
+          system("pause");
+          system("cls");
+          fflush(stdin);
+          for(i = 0; i < 20; i++)
+            {
+              resposta[i]='_';
+            }
+          while(contador < 6)
+            {
+              n=0;
+              certo=0;
+              switch(contador)
+                {
+                  case 0: MessageBox(NULL,"___________   \n|         |   \n|        _|_\n|          \n|        \ \n|         \n| \n| \n| \n\n","Jogo da forca", MB_OK);
+                          break;     
+                  case 1: MessageBox(NULL,"___________   \n|         |   \n|        _|_\n|         O    \n|         \n|       \n| \n| \n| \n\n","Jogo da forca", MB_OK);
+                          break;    
+                  case 2: MessageBox(NULL,"___________   \n|         |   \n|        _|_\n|         O    \n|         |    \n|         \n| \n| \n| \n\n","Jogo da forca", MB_OK);
+                          break;   
+                  case 3: MessageBox(NULL,"___________   \n|         |   \n|        _|_\n|         O    \n|        /|    \n|         \n| \n| \n| \n\n","Jogo da forca", MB_OK);
+                          break;  
+                  case 4: MessageBox(NULL,"___________   \n|         |   \n|        _|_\n|         O    \n|        /|\\    \n|         \n| \n| \n| \n\n","Jogo da forca", MB_OK);
+                          break; 
+                  case 5: MessageBox(NULL,"___________   \n|         |   \n|        _|_\n|         O    \n|        /|\\    \n|        /  \n| \n| \n| \n\n","Jogo da forca", MB_OK);
+                          break;
+                }
+              for(i=0; i < 20; i++)
+                {
+                  if(frase[i]=='\0')
+                    {
+                      nchar = i;
+                      break;
+                    }
+                  else
+                    {
+                      if(frase[i]==' ')
+                        {
+                          resposta[i]=' ';
+                          printf("%c", resposta[i]);
+                        }
+                      else
+                        {
+                          if(frase[i]==tentativa)
+                            {
+                              resposta[i]=frase[i];
+                            }
+                        }
+                    }
+                  printf("%c ", resposta[i]);    
+                }
+              printf("\n\n%c %c %c %c %c\n", erro1, erro2, erro3, erro4, erro5);
+              switch(contador)
+                {
+                  case 0: MessageBox(NULL,"\n\nVoce pode errar 6 vezes","Jogo da forca", MB_OK);
+                          break;
+                  case 1: MessageBox(NULL,"\n\nVoce pode errar 5 vezes","Jogo da forca", MB_OK);
+                          break;
+                  case 2: MessageBox(NULL,"\n\nVoce pode errar 4 vezes","Jogo da forca", MB_OK);
+                          break;
+                  case 3: MessageBox(NULL,"\n\nVoce pode errar 3 vezes","Jogo da forca", MB_OK);
+                          break;
+                  case 4: MessageBox(NULL,"\n\nVoce pode errar mais 2 vezes","Jogo da forca", MB_OK);
+                          break;
+                  case 5: MessageBox(NULL,"\n\nEste e seu ultimo erro","Jogo da forca", MB_OK);
+                }
+                for(i = 0; i <= nchar; i++)
+                {
+                 if(tentativa!=' ')
+                   {
+                    if(resposta[i]!='_')
+                      {
+                        certo++;
+                        if(certo==nchar)
+                          {
+                            contador=7;                          
+                            break;
+                          }
+                      }
+                   }
+                }
+              if(certo!=nchar)
+              {
+              MessageBox(NULL,"\n\nDigite uma letra: ","Jogo da forca", MB_OK);
+              fflush(stdin);
+              scanf("%c", &tentativa);
+              tentativa = tolower(tentativa);
+              }
+              for(i = 0; i < nchar; i++)
+                {
+                  if(tentativa!=frase[i])
+                    {
+                      n++;
+                      if(n==nchar)
+                        {
+                          contador++;
+                          if(contador==1) 
+                            {
+                              erro1 = tentativa;
+                            }
+                          if(contador==2) 
+                            {
+                              erro2 = tentativa;
+                            }
+                          if(contador==3) 
+                            {
+                              erro3 = tentativa;
+                            }
+                          if(contador==4) 
+                            {
+                              erro4 = tentativa;
+                            }
+                          if(contador==5) 
+                            {
+                              erro5 = tentativa;
+                            }
+                        }
+                    }
+              }
+              system("cls");
+            }
+          default: confirmar = 'n'; 
+        }
+      if(contador==6)
+        {
+         MessageBox(NULL,"___________   \n|         |   \n|        _|_\n|         O    \n|        /|\\    \n|        / \\ \n| \n| \n| \n\n","Jogo da forca", MB_OK);
+          for(i = 0; i < nchar; i++)
+            {
+              if(resposta[i]==frase[i])
+                {
+                  printf("%c ", resposta[i]);
+                }
+              else
+                {
+                  printf("<%c> ", frase[i]);
+                }
+            }
+          printf("\n\n%c %c %c %c %c %c\n", erro1, erro2, erro3, erro4, erro5, tentativa);
+        
+         
+        }
+        anima(contador);
+}
+
+int anima(int aux)
+{  
+     int animacao, animacao2;
+	 if(aux==7)
+        {
+          for(animacao=0;animacao<7;animacao++)
+            {
+              for(animacao2=0;animacao2<5;animacao2++)
+              {
+                system("cls");
+                printf("Parabens!! Voce Venceu!!\n");
+                printf("___________ \n|         | \n|        _|_\n|\n|\n|         O \n|        /|\\ \n|        / \\\n|\n\n");
+              }
+              for(animacao2=0;animacao2<5;animacao2++)
+              {
+                system("cls");
+                printf("Parabens!! Voce Venceu!!\n");
+                printf("___________ \n|         | \n|        _|_\n|\n|\n|\n|        _O_\n|         | \n|        / \\\n\n");                
+              }
+              for(animacao2=0;animacao2<5;animacao2++)
+              {
+                system("cls");
+                printf("Parabens!! Voce Venceu!!\n");
+                printf("___________ \n|         | \n|        _|_\n|\n|\n|        \\O/\n|         | \n|        / \\\n|\n\n");
+              }
+            }
+          system("cls");
+          printf("Parabens!! Voce Venceu!!\n");
+          printf("___________ \n|         | \n|        _|_\n|\n|\n|\n|        \\O/\n|         | \n|        / \\\n\n");
+        }    
+}
+
