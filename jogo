@@ -1,0 +1,75 @@
+#include <stdio.h>     
+#include <stdlib.h>     
+#include <time.h>
+#include <string.h>
+#include <ctype.h>
+
+int tam (char *p) {
+   int i=0;
+   while (*p++ != '\0') i++;
+   return i;
+}
+
+
+int main ()
+{  
+    char *palavra, letra, resp='S',conf;
+    int tamanho,erros, acertos, result=0, i;
+    int num_palavras=0;
+    int sorteada;
+    FILE *fp;
+    char *nomearq = "palavras.txt";
+    
+	fp = fopen("palavras.txt","rt");
+    if (fp == NULL) {
+      printf("Nao foi possivel abrir o arquivo '%s'!",nomearq);
+      getch();
+      return 0;
+    }   
+    while (!feof(fp)) {
+      
+      fscanf(fp,"%s",palavra);
+     
+      num_palavras++;
+   }
+   fclose(fp);
+	
+	 
+    fflush(stdin);
+    sorteio(palavra,num_palavras);
+    fflush(stdin);
+    printf("\nDeseja jogar novamente?(S/N)\n");
+    scanf("%c",&conf);
+	if(conf =='s')
+	{
+		sorteio();
+	}
+	else{}
+	system("pause"); 	
+	return 0;
+}
+
+void sorteio(char palavras,int aux)
+{
+    fflush(stdin);
+    int i,j;
+   /*char palavras [178][38]={"arroz","feijao","maracuja","juventus","internazionale","moscou","nova iorque","rugby","basquete","pilha","coelho","fone","televisao","tela","impressora","celular","chocolate","fluminense","sao paulo",
+	"belo horizonte","vilao","heroi","argentina","camera","latitude","aviao","inglaterra","mercurio","oeste","chicago","natal","persia","grecia","superficial","copa","holanda","atividade","mega","ilha","ultima","parque","guadalupe",
+	"letonia","comida","trono","policia","urna","papa","legislacao","estocolmo","tudo","assunto","controle","jogador","hoje","australia","vexame","teresopolis","amanha","passaro","dificil","acesso","papibaquigrafo","casa","valioso",
+	"simpatia","exercicio","ingleses","organizacao","euforia","pessoa","sabedoria","vontade","california","samba","minerador","apresentacao","constituicao","divisao","minutos","azul","corredor","medico","bermuda","cachorro","imagens",
+	"animal","rato","teclado","volume","editor","executivo","jornalismo","cartao","morto","porto","alegria","producao","importante","equipe","nacionalidade","coracao","japao","carro","musica","perfilado","aplausos","vivo","redencao",
+	"reino","uniao","calopsita","treinador","sistema","nacional","surfe","negocio","destruicao","escola","executado","remedio","tecnico","formacao","esquema","fofa","camiseta","cabeludo","barba","canela","nojento","goleiro","cadeira",
+	"carteira","camisa","saudacao","piano","agapornes","quadro","reflexo","espelho","planta","proximo","rolamento","levantado","abelha","coronel","rispida","rigido","ancestrais","virologia","estupidez","apoio","bola","perigosa","filme",
+	"caveira","lingua","sociedade","letras","gremio","mesa","dedo","mosca","sujeira","piso","dificuldade","recuo","cimento","campo","pizza","invecibilidade","matematica","sociologia","lugar","varal","gravata","progamacao","circulo"};*/
+    char sorteada[100];
+	
+	srand(time(NULL));
+	sorteada = rand() % aux;
+	 for(j=0;j<178;j++)
+	 {
+     	sorteada[j]=palavras;
+     }
+	printf("A palavra foi sorteada\n");
+	jogar (sorteada);
+
+}
